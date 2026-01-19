@@ -10,6 +10,16 @@ export const getPopularBarbershops = async () => {
     orderBy: {
       name: "desc",
     },
-  
+  });
+};
+
+export const getBarbershopById = async (id: string) => {
+  return await prisma.barbershop.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      services: true,
+    },
   });
 };
