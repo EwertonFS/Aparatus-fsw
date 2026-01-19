@@ -63,9 +63,9 @@ Você está trabalhando no **Aparatus**, um SaaS de agendamento para barbearias.
 
 ---
 
-### [ ] Tarefa 03: Fluxo de Agendamento (Sheet de Reserva) - EM EXECUÇÃO 🚀
-
+### [x] Tarefa 03: Fluxo de Agendamento (Sheet de Reserva)
 **Visão Geral:** Implementar o fluxo de seleção de data e horário para reserva utilizando o componente `Sheet` do **shadcn/ui**.
+- **Status:** Finalizada.
 
 - **Figma Principal:**https://www.figma.com/design/bCaPSyWPhuDYYTLY61oeaj/Aparatus-%7C-Alunos--Copy-?node-id=78-1818&t=G5J73zq8XAS3IiwE-4(**Use Figma MCP**).
 - **Figma Card de Resumo:** https://www.figma.com/design/bCaPSyWPhuDYYTLY61oeaj/Aparatus-%7C-Alunos--Copy-?node-id=78-1861&t=G5J73zq8XAS3IiwE-4 (**Use Figma MCP**).
@@ -93,19 +93,6 @@ Você está trabalhando no **Aparatus**, um SaaS de agendamento para barbearias.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## ✅ Checklist de Verificação (Auto-Revisão da IA)
 1. Usei `rem` em vez de `px`?
 2. Respeitei a regra de **NUNCA** usar Prisma no componente?
@@ -114,5 +101,3 @@ Você está trabalhando no **Aparatus**, um SaaS de agendamento para barbearias.
 
 
 
-
-Task-03 em execução

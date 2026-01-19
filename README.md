@@ -116,3 +116,30 @@ Os componentes são instalados na raiz em:
 
 Nas páginas e componentes, as importações devem seguir o padrão:
 `import { Button } from "@/components/ui/button";`
+
+
+serve para formatar automaticamente o arquivo schema.prisma de acordo com as regras de estilo definidas pelo próprio Prisma
+
+
+npx prisma db push
+O que faz: pega o estado atual do seu schema.prisma e empurra diretamente para o banco de dados, criando/alterando tabelas conforme necessário.
+
+Não gera migrações → apenas sincroniza o banco com o schema.
+
+Uso típico: rápido para prototipagem, testes locais ou quando você não precisa manter histórico de mudanças.
+
+Limitação: como não gera arquivos de migração, você perde o rastreamento da evolução do banco. Isso pode causar inconsistências quando outros desenvolvedores ou ambientes (produção, staging) precisam aplicar as mesmas alterações.
+
+🔹 npx prisma migrate dev
+O que faz: compara o schema.prisma com o estado atual do banco e gera um arquivo de migração SQL dentro da pasta prisma/migrations.
+
+Aplica a migração ao banco de dados e mantém um histórico versionado.
+
+Uso típico: em desenvolvimento colaborativo, quando você precisa compartilhar e versionar mudanças no banco.
+
+Vantagem: garante consistência entre ambientes (dev, staging, produção), já que todos aplicam as mesmas migrações.
+
+Extra: também atualiza o cliente Prisma (prisma generate) automaticamente
+
+
+npx prisma generate → atualiza o Prisma Client para refletir o schema.
