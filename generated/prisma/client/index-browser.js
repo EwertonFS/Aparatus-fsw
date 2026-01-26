@@ -138,6 +138,18 @@ exports.Prisma.BarbershopServiceScalarFieldEnum = {
   barbershopId: 'barbershopId'
 };
 
+exports.Prisma.BookingScalarFieldEnum = {
+  id: 'id',
+  stripeChargeId: 'stripeChargeId',
+  barbershopId: 'barbershopId',
+  serviceId: 'serviceId',
+  userId: 'userId',
+  date: 'date',
+  cancelledAt: 'cancelledAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -203,6 +215,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   Barbershop: 'Barbershop',
   BarbershopService: 'BarbershopService',
+  Booking: 'Booking',
   User: 'User',
   Session: 'Session',
   Account: 'Account',

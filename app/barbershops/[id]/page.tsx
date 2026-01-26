@@ -54,13 +54,13 @@ const BarbershopPage = async ({ params }: BarbershopPageProps) => {
         <PageSectionContent>
           <PageSectionTitle>Contatos</PageSectionTitle>
           <div className="flex flex-col gap-3">
-            {barbershop.phones.map((phone) => (
+            {barbershop.phones.map((phone, index) => (
               <div
-                key={phone}
+                key={index}
                 className="border-border bg-card flex items-center justify-between rounded-xl border p-4 shadow-sm"
               >
                 <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium text-black">{phone}</p>
+                  <p className="text-sm font-medium">{phone}</p>
                 </div>
                 <CopyPhoneButton phone={phone} />
               </div>
