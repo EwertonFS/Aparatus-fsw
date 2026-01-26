@@ -17,11 +17,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import { BookingWithRelations } from "@/data/bookings";
 import { getBookingStatus } from "@/lib/booking-status";
-// import BookingSummary from "./booking-summary";
-// import CopyButton from "@/app/barbershops/[id]/_components/copy-button";
+import BookingSummary from "./booking-summary";
+import CopyButton from "@/app/barbershops/[id]/_components/copy-button";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
-import { Smartphone, X, Loader2 } from "lucide-react";
-// import { cancelBooking } from "@/actions/cancel-booking";
+import { Smartphone, Loader2 } from "lucide-react";
+import { cancelBooking } from "@/actions/cancel-booking";
 import { useAction } from "next-safe-action/hooks";
 import { toast } from "sonner";
 
@@ -32,21 +32,21 @@ interface BookingInfoSheetProps {
 
 const BookingInfoSheet = ({ booking, onClose }: BookingInfoSheetProps) => {
   const status = getBookingStatus(booking.date, booking.cancelledAt);
-  // const { executeAsync: executeCancelBooking, isPending: isCancelling } =
-  //   useAction(cancelBooking);
+  const { executeAsync: executeCancelBooking, isPending: isCancelling } =
+    useAction(cancelBooking);
 
   const handleCancelBooking = async () => {
-    // const result = await executeCancelBooking({ bookingId: booking.id });
-    // if (result?.validationErrors) {
-    //   return toast.error(result.validationErrors._errors?.[0]);
-    // }
-    // if (result?.serverError) {
-    //   return toast.error(
-    //     "Erro ao cancelar agendamento. Por favor, tente novamente.",
-    //   );
-    // }
-    // toast.success("Agendamento cancelado com sucesso!");
-    // onClose();
+    const result = await executeCancelBooking({ bookingId: booking.id });
+    if (result?.validationErrors) {
+      return toast.error(result.validationErrors._errors?.[0]);
+    }
+    if (result?.serverError) {
+      return toast.error(
+        "Erro ao cancelar agendamento. Por favor, tente novamente.",
+      );
+    }
+    toast.success("Agendamento cancelado com sucesso!");
+    onClose();
   };
 
   return (
@@ -84,15 +84,15 @@ const BookingInfoSheet = ({ booking, onClose }: BookingInfoSheetProps) => {
             </Badge>
           )}
 
-          {/* <BookingSummary
+          <BookingSummary
             serviceName={booking.service.name}
             servicePrice={booking.service.priceInCents}
             barbershopName={booking.barbershop.name}
             date={booking.date}
-          /> */}
+          />
         </div>
 
-        {/* {booking.barbershop.phones.length > 0 && (
+        {booking.barbershop.phones.length > 0 && (
           <div className="flex flex-col gap-3">
             {booking.barbershop.phones.map((phone, index) => (
               <div
@@ -107,7 +107,7 @@ const BookingInfoSheet = ({ booking, onClose }: BookingInfoSheetProps) => {
               </div>
             ))}
           </div>
-        )} */}
+        )}
       </div>
 
       <div className="flex gap-3 border-t px-5 py-6">
@@ -119,7 +119,7 @@ const BookingInfoSheet = ({ booking, onClose }: BookingInfoSheetProps) => {
           Voltar
         </Button>
 
-        {/* {status === "confirmed" && (
+        {status === "confirmed" && (
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" className="flex-1 rounded-full">
@@ -138,15 +138,19 @@ const BookingInfoSheet = ({ booking, onClose }: BookingInfoSheetProps) => {
                 <AlertDialogCancel>Não, manter reserva</AlertDialogCancel>
                 <AlertDialogAction
                   onClick={handleCancelBooking}
-                  // disabled={isCancelling}
+                  disabled={isCancelling}
                   className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
                 >
-                  Sim, cancelar
+                  {isCancelling ? (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  ) : (
+                    "Sim, cancelar"
+                  )}
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-        )} */}
+        )}
       </div>
     </SheetContent>
   );

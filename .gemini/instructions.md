@@ -30,6 +30,19 @@ Você está trabalhando no **Aparatus**, um SaaS de agendamento para barbearias.
 
 ---
 
+## Server Actions
+
+- **SEMPRE** use a biblioteca "next-safe-action" para criar Server Actions.
+- **SEMPRE** Use o hook "useAction" da biblioteca "next-safe-action" para chamar uma Server Action.
+- **SEMPRE** use a Server Action @actions/create-booking.ts como base para criar as suas.
+- **SEMPRE** faça validações de autorização e autenticação em uma Server Action conforme o usuário.
+- **SEMPRE** use o `protectedActionClient` em actions protegidas (veja @lib/action-client.ts).
+- **SEMPRE** crie as server actions na pasta @actions.
+
+
+
+
+
 ## 📋 Backlog de Tarefas
 
 ### [x] Tarefa 01: Página de Detalhes da Barbearia
@@ -90,6 +103,45 @@ Você está trabalhando no **Aparatus**, um SaaS de agendamento para barbearias.
 #### ⚡ UX E PERFORMANCE
 - **SEMPRE** utilize `rem` para o espaçamento dos slots de horário.
 - **SEMPRE** garanta que o componente seja um `'use client'`, pois depende de interatividade e estado.
+
+### [x ] Tarefa 04
+Sua tarefa é criar a tela que está https://www.figma.com/design/KBlNBjp5XXWUj64ZCiT9lq/Aparatus?node-id=10-7658&m=dev usando Figma MCP no arquivo @app/bookings/page.tsx.
+
+Requisitos Técnicos
+Recupere os agendamentos do banco de dados.
+Exiba os agendamentos confirmados de forma separada dos finalizados, assim como está no Figma.
+Reutilize o componente @app/_components/booking-item.tsx.
+Um agendamento é considerado "Confirmado" quando a data é no futuro, e "Finalizado" quando ela é no passado ou quando ele está cancelado (cancelledAt).
+Exiba badges diferentes para agendamentos confirmados, finalizados e cancelados.
+Use o componente @components/header.tsx.
+
+### [x ] Tarefa 05
+Tarefa
+Crie um sheet de cancelamento de reserva que é exibido quando o usuário clica no @components/booking-item.tsx.
+A interface deve ser exatamente igual ao que está no Figma em https://www.figma.com/design/KBlNBjp5XXWUj64ZCiT9lq/Aparatus?node-id=78-2337&m=dev.
+Requisitos Funcionais
+Ao clicar em "Cancelar reserva", exiba um Alert Dialog do shadcn confirmando se o usuário quer cancelar a reserva.
+Exiba os dados da barbearia e do serviço no sheet. Recupere eles do banco de dados.
+Os botões de "Copiar" telefone devem copiar os telefones para o clipboard.
+A imagem do mapa é estática (@public/map.png).
+Um agendamento é considerado "Confirmado" quando a data é no futuro, e "Finalizado" quando ela é no passado ou quando ele está cancelado (cancelledAt).
+Crie uma função utilitária que retorne essa informação, e use ela também em @components/booking-item.tsx.
+Use o componente @app/barbershops/[id]/_components/copy-button.tsx.
+O botão de "Voltar" deve fechar o sheet.
+Requisitos Técnicos
+Crie uma server action que faça o cancelamento da reserva.
+Crie um componente chamado "booking-summary" que renderize https://www.figma.com/design/KBlNBjp5XXWUj64ZCiT9lq/Aparatus?node-id=235-348&m=dev. Use ele também em @components/service-item.tsx.
+
+### [x ] Tarefa 06
+Ao buscar no input que está em @components/quick-search.tsx leve o usuário para a página "/barbershops?search=value"
+
+Requisitos Funcionais
+Caso não haja barbearias encontradas, renderize uma mensagem de vazio.
+Exiba o Header e o Footer.
+Crie essa nova página.
+Requisitos Técnicos
+Use o componente @components/barbershop-item.tsx para renderizar as barbearias.
+Busque no banco de dados todas as barbearias que possuem SERVIÇOS com um nome que contenha o valor buscado pelo usuário.
 
 
 
