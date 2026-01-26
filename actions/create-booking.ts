@@ -7,6 +7,7 @@ import prisma from "@/lib/prisma";
 import auth from "@/lib/auth";
 //session cookies
 import { headers } from "next/headers";
+import { isPast } from "date-fns";
 
 // This schema is used to validate input from client.
 const inputSchema = z.object({
@@ -18,14 +19,18 @@ export const createBooking = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput: { serviceId,date} }) => {
 
+    //Verifica se a data e hora selecionadas ja estao agendadas
+    if(isPast(date)){
+        return returnValidationErrors(inputSchema, { _errors: ["Data e hora selecionadas já estão agendadas."] });
+    }
   
-   
+   //Verifica se o usuario esta logado
     const session = await auth.api.getSession({
         headers:await headers()
     })
 
 
-     //Ususario esta logado?
+     //Verifica se o usuario esta logado
     if(!session?.user){
         return returnValidationErrors(inputSchema, { _errors: ["Usuário não autenticado"] });
     }
@@ -36,7 +41,7 @@ export const createBooking = actionClient
         }
     })
 
-    //serviço existe?
+    //Verifica se o serviço existe
 
     if(!service){
         return returnValidationErrors(inputSchema, { _errors: ["Serviço não encontrado"] });
@@ -50,7 +55,7 @@ export const createBooking = actionClient
     });
     
     
-    //Já existe agendamento?
+    //Verifica se ja existe agendamento
     if (existingBooking) {
       return returnValidationErrors(inputSchema, {
         _errors: ["Data e hora selecionadas já estão agendadas."],
