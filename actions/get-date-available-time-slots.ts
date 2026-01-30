@@ -22,6 +22,7 @@ export const getDateAvailableTimeSlots = actionClient
           gte: startOfDay(date),
           lte: endOfDay(date),
         },
+        cancelledAt:null,
       },
     });
 
@@ -30,16 +31,18 @@ export const getDateAvailableTimeSlots = actionClient
 
     // 3. Filtrar os horários que já estão ocupados
     const availableTimeSlots = allTimeSlots.filter((time) => {
-      // Extrair horas e minutos do slot atual (ex: "09:30")
-      const [hours, minutes] = time.split(":").map(Number);
-      
-      // Verificar se existe algum agendamento com o mesmo horário
+      // Verificar se existe algum agendamento com o mesmo horário formatado para Brasília
       const isOccupied = bookings.some((booking) => {
-        return booking.date.getHours() === hours && booking.date.getMinutes() === minutes;
+        const bookingTime = booking.date.toLocaleTimeString("pt-BR", {
+          hour: "2-digit",
+          minute: "2-digit",
+          timeZone: "America/Sao_Paulo",
+        });
+        return bookingTime === time;
       });
 
       return !isOccupied;
     });
 
     return availableTimeSlots;
-  });
+  }); 

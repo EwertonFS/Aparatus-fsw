@@ -23,3 +23,28 @@ export const getBarbershopById = async (id: string) => {
     },
   });
 };
+
+export const searchBarbershops = async (search: string) => {
+  return await prisma.barbershop.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            contains: search,
+            mode: "insensitive",
+          },
+        },
+        {
+          services: {
+            some: {
+              name: {
+                contains: search,
+                mode: "insensitive",
+              },
+            },
+          },
+        },
+      ],
+    },
+  });
+};

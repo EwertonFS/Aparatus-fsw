@@ -13,22 +13,15 @@ export function formatCurrency(cents: number) {
 }
 
 export function generateDayTimeList(date: Date): string[] {
-  const startTime = new Date(date);
-  startTime.setHours(9, 0, 0, 0);
-  const endTime = new Date(date);
-  endTime.setHours(17, 0, 0, 0);
-
   const timeList: string[] = [];
-  const currentTime = startTime;
 
-  while (currentTime <= endTime) {
-    timeList.push(
-      currentTime.toLocaleTimeString("pt-BR", {
-        hour: "2-digit",
-        minute: "2-digit",
-      })
-    );
-    currentTime.setMinutes(currentTime.getMinutes() + 30);
+  // Gerar horários das 09:00 às 17:30 (Business hours)
+  for (let hour = 9; hour <= 17; hour++) {
+    for (const minute of ["00", "30"]) {
+      // Evita gerar 17:30 se o limite for 17:00
+      if (hour === 17 && minute === "30") break;
+      timeList.push(`${hour.toString().padStart(2, "0")}:${minute}`);
+    }
   }
 
   return timeList;

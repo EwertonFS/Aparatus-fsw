@@ -18,7 +18,7 @@ interface BookingItemProps {
 const BookingItem = ({ booking: propBooking }: BookingItemProps) => {
   const [sheetIsOpen, setSheetIsOpen] = useState(false);
 
-  const mockBooking: BookingWithRelations = {
+  const mockBooking: any = {
     id: "1",
     date: new Date(),
     cancelledAt: null,
@@ -40,13 +40,13 @@ const BookingItem = ({ booking: propBooking }: BookingItemProps) => {
     },
   };
 
-  const booking = propBooking || mockBooking;
+  const booking = (propBooking || mockBooking) as BookingWithRelations;
   const status = getBookingStatus(booking.date, booking.cancelledAt);
 
   return (
     <Sheet open={sheetIsOpen} onOpenChange={setSheetIsOpen}>
       <SheetTrigger asChild>
-        <Card className="flex h-full w-full min-w-full cursor-pointer flex-row items-center justify-between p-0">
+        <Card className="flex h-full min-w-[90%] cursor-pointer flex-row items-center justify-between p-0">
           <div className="flex flex-1 flex-col gap-4 p-4">
             {status === "cancelled" ? (
               <Badge variant="destructive">CANCELADO</Badge>
@@ -66,7 +66,7 @@ const BookingItem = ({ booking: propBooking }: BookingItemProps) => {
             </div>
           </div>
 
-          <div className="flex h-full w-[6.625rem] flex-col items-center justify-center border-l py-3">
+          <div className="flex h-full w-26.5 flex-col items-center justify-center border-l py-3">
             <p className="text-xs capitalize">
               {format(booking.date, "MMMM", { locale: ptBR })}
             </p>

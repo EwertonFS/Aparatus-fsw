@@ -68,6 +68,7 @@ export const createBooking = actionClient
             date,
             userId:session.user.id,
             barbershopId:service.barbershopId,
+            cancelledAt:null,
         }
     })
 
