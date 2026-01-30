@@ -143,6 +143,16 @@ Requisitos Técnicos
 Use o componente @components/barbershop-item.tsx para renderizar as barbearias.
 Busque no banco de dados todas as barbearias que possuem SERVIÇOS com um nome que contenha o valor buscado pelo usuário.
 
+### [x] Tarefa 07
+- Sua tarefa é criar um chat de IA que está em https://www.figma.com/design/KBlNBjp5XXWUj64ZCiT9lq/Aparatus?node-id=14-941&m=dev.
+
+## Requisitos Técnicos
+
+- Use a Vercel AI SDK para interagir com o modelo. Chame a rota @app/api/chat/route.ts no hook "useChat".
+- Envie o valor do input "Envie sua mensagem" quando o usuário clicar no botão de enviar.
+- Use Context7 para buscar na documentação da Vercel AI SDK.
+- Crie uma nova página (/chat).
+- Crie um botão ao lado do botão de menu no @components/header.tsx que leve o usuário para essa nova página de chat.
 
 
 ## ✅ Checklist de Verificação (Auto-Revisão da IA)
